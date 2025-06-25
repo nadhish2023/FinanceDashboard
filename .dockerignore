@@ -1,0 +1,53 @@
+# .dockerignore
+
+# This file tells Docker which files and directories to ignore when building the image.
+# This results in faster builds and smaller, more secure images.
+
+# --- Version Control ---
+# The entire Git history is not needed inside the running container.
+.git
+.gitignore
+
+# --- Docker ---
+# Ignore the Dockerfile itself and this .dockerignore file.
+Dockerfile
+.dockerignore
+
+# --- Python ---
+# Ignore Python's bytecode cache and virtual environments. The container
+# builds its own clean environment based on pyproject.toml.
+__pycache__/
+*.pyc
+*.pyo
+.venv
+venv
+
+# --- Local Databases and Logs ---
+# These are generated during local development and should never be in the image.
+# Ignoring them is crucial for build cache performance.
+*.db
+*.db-journal*
+*.log
+
+# --- IDE and Editor Configuration ---
+# Your personal editor settings do not belong in the application image.
+.idea/
+.vscode/
+
+# --- DevOps and CI/CD Configuration Files ---
+# These files are for the pipeline and infrastructure management, not for the
+# application's runtime.
+.github/
+puppet/
+nagios/
+k8s-deploy.yaml
+Jenkinsfile
+
+# --- Testing ---
+# The unit tests are for the development and CI phase, not for the final production image.
+tests/
+
+# --- Operating System Files ---
+# Common OS-specific metadata files.
+.DS_Store
+Thumbs.db
