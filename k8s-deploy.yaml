@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finance-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: finance-app
+  template:
+    metadata:
+      labels:
+        app: finance-app
+    spec:
+      containers:
+      - name: finance-app-container
+        image: nadhish2023/finance-dashboard:latest
