@@ -1,0 +1,32 @@
+# docker-compose.yml
+# This file defines the services for our local monitoring stack.
+
+version: '3.7'
+
+services:
+  # The Graphite service to receive and store time-series metrics.
+  # It also includes the StatsD daemon for collecting data.
+  graphite:
+    image: graphiteapp/graphite-statsd
+    container_name: graphite
+    ports:
+      # Port for StatsD (metrics listener). Your Python app sends data here via UDP.
+      - "8125:8125/udp"
+      # Port for the Graphite Web UI (for direct inspection, optional)
+      - "8081:80"
+      # Port for the Carbon receiver (where Grafana can get data)
+      - "2003:2003"
+
+  # The Grafana service to visualize the data from Graphite and manage alerts.
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      # The main web interface for Grafana.
+      - "3000:3000"
+    # This tells Docker Compose to start the 'graphite' service before starting Grafana.
+    depends_on:
+      - graphite
+    # You can set the initial admin password here for convenience.
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
