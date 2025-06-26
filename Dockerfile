@@ -25,3 +25,5 @@ COPY . .
 
 # No CMD is needed, as this image's primary purpose is to be a package for testing
 # in CI/CD and for deployment in Kubernetes.
+
+CMD ["python", "-u", "healthcheck.py"]
