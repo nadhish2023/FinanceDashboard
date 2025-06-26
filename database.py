@@ -97,6 +97,3 @@ def get_financial_summary(conn=None):
     total_expense = result['total_expense'] or 0.0
     balance = total_income - total_expense
     return {'income': total_income, 'expense': total_expense, 'balance': balance}
-
-# Call this once when the module is first imported by the main app
-initialize_db()

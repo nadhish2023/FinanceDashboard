@@ -125,6 +125,7 @@ class FinanceApp(ttk.Frame):
             except IOError as e: messagebox.showerror("Error", f"Could not export data: {e}")
 
 if __name__ == "__main__":
+    database.initialize_db()
     root = tk.Tk()
     root.title("Personal Finance Dashboard")
     root.geometry("1100x700")
